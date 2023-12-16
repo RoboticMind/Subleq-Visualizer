@@ -5,6 +5,12 @@ import Html.Attributes exposing (style)
 import Html
 
 
+mainDivStyle : List (Html.Attribute msg)
+mainDivStyle = [
+     style "text-align" "center"
+    ,style "font-size" "300%"
+    ,style "font-family" "monospace, monospace" --repeating monospace twice is recomended behaviour to stop browser from scaling down text: https://stackoverflow.com/questions/38781089/font-family-monospace-monospace
+    ]  
 baseCellStyle : Model -> Int -> List (Html.Attribute msg)
 baseCellStyle model index =
     --highlights the cells base on what they refer to
@@ -110,5 +116,7 @@ haltStyle = [
 
 inputStyle : List (Html.Attribute msg)
 inputStyle = [
-    style "margin" "auto"
+     style "margin" "auto"
+    ,style "width" "50%"
+    ,style "text-align" "center"
     ]

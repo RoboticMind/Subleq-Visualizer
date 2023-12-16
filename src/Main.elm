@@ -16,6 +16,7 @@ import Html.Lazy exposing (lazy)
 
 import Style exposing (..)
 import Model exposing (..)
+import Html exposing (textarea)
 
 main : Program () Model Msg
 main =
@@ -165,7 +166,7 @@ renderList model =
 
 view : Model -> Html Msg
 view model =
-  div [style "text-align" "center", style "font-size" "300%"] [
+  div mainDivStyle [
        div [style "font-size" "33%"] [
            div [style "margin-top" "5px"] [
                  span [] [text <| (String.fromFloat model.speed) ++ "ms/step"]
@@ -193,7 +194,7 @@ view model =
             ]
        ,div memDivStyle (renderList model)
        ,input (inputStyle ++ [
-            placeholder "set cell values (spaces between)"
+            placeholder "set cell values as space seperated list"
             ,value model.stateInput
             ,onInput UpdateInput
             ,onEnter (SetState model.stateInput)
