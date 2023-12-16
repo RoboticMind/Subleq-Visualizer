@@ -12,89 +12,10 @@ import Maybe exposing (withDefault)
 import String
 import Time
 import Html.Lazy exposing (lazy)
-import Browser.Events
-
--- MAIN
 
 
-
-
-getStyle : Model -> Int -> List (Html.Attribute msg)
-getStyle model index = 
-    let
-        compareAppend =
-            if getTapeValue model (model.curPos) == index then
-                compareStyle ++ [style "text-decoration-color" "blue"]
-            else if getTapeValue model (model.curPos+1) == index then
-                compareStyle ++ [style "text-decoration-color" "darkorange"]
-            else 
-                []
-        
-        jumpPointCompare =
-            if getTapeValue model (model.curPos+2) == index then
-                [style "text-decoration" "underline overline 0.3ch"
-                ,style "text-decoration-color" "yellow"
-                ]
-            else
-                []
-
-        appendedStyle = compareAppend ++ jumpPointCompare
-    in
-    
-    if index == model.curPos then
-        memStyleA ++ appendedStyle
-    else if index - model.curPos == 1 then
-        memStyleB ++ appendedStyle
-    else if index - model.curPos == 2 then
-        condJumpStyle ++ appendedStyle
-    else
-        defualtStyle ++ appendedStyle
-
-memStyleA : List (Html.Attribute msg)
-memStyleA = [
-    style "display" "inline"
-    ,style "border" "solid black"
-    ,style "background" "lightgreen"
-    ,style "flex" "1 1 30%"
-    ,style "color" "blue"]
-
-memStyleB : List (Html.Attribute msg)
-memStyleB = [style "display" "inline"
-    ,style "border" "solid black"
-    ,style "background" "lightgreen"
-    ,style "flex" "1 1 30%"
-    ,style "color" "darkorange"]
-
-condJumpStyle : List (Html.Attribute msg)
-condJumpStyle = [style "display" "inline"
-    ,style "border" "solid black"
-    ,style "background" "yellow"
-    ,style "flex" "1 1 30%"]
-
-defualtStyle : List (Html.Attribute msg)
-defualtStyle = [style "display" "inline"
-    ,style "border" "solid black"
-    ,style "border-spacing" "10px"
-    ,style "flex" "1 1 30%"]
-
-
-compareStyle : List (Html.Attribute msg)
-compareStyle = [
-    style "text-decoration" "underline overline 0.3ch"
-    ]
-
-memDivStyle : List (Html.Attribute msg)
-memDivStyle = [
-         style "display" "flex"
-        ,style "flex-wrap" "wrap"
-        ,style "width" "50%"
-        ,style "margin" "auto"
-    ]
-
-outputStyle : List (Html.Attribute msg)
-outputStyle = [
-     style "font-size" "50%"
-    ,style "margin-top" "5px"]
+import Style exposing (..)
+import Model exposing (..)
 
 main : Program () Model Msg
 main =
@@ -107,19 +28,7 @@ main =
 
 
 
--- MODEL
-
-
-type alias Model = {
-     tape:   Dict Int Int
-    ,curPos: Int
-    ,output: String
-    ,stateInput: String
-    ,timeStepToggle: Bool
-    ,speed: Float
-    }
-
-
+--INIT
 sayHiProgram : List ( Int, Int )
 sayHiProgram = [(0,9),(1,-1),(2,3),(3,10),(4,-1),(5,6),(6,11),(7,-1),(8,0),(9,72),(10,105),(11,32)]
 
@@ -134,10 +43,7 @@ init _ = noCommand {
     }
 
 
-
-
 -- UPDATE
-
 subscriptions : Model -> Sub Msg
 subscriptions model =
     if model.timeStepToggle == True then
@@ -147,11 +53,6 @@ subscriptions model =
     --Browser.Events.onAnimationFrame (\_ -> RunStep)
     --
 
-
-
-getTapeValue : Model -> Int ->  Int
-getTapeValue model index =
-    withDefault 0 (Dict.get index model.tape)
 
 runOneStep : Model -> Model
 runOneStep model =
@@ -300,9 +201,6 @@ view model =
             ,value model.stateInput
             ,onInput UpdateInput
             ,onEnter (SetState model.stateInput)
-            -- ,style "position" "absolute"
-            -- ,style "bottom" "9px"
-            -- ,style "left" "12px"
             ,style "margin" "auto"
             ] []
     ]
