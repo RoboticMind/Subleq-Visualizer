@@ -3,7 +3,7 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, button, div, text, li, br, input, span)
-import Html.Attributes exposing (style, value, type_, placeholder)
+import Html.Attributes exposing (style, value, type_, placeholder, src)
 import Html.Events exposing (onSubmit, onClick, onInput)
 import Html.Events.Extra exposing (onEnter)
 import String exposing (fromInt)
@@ -17,6 +17,7 @@ import Html.Lazy exposing (lazy)
 import Style exposing (..)
 import Model exposing (..)
 import Html exposing (textarea)
+import Html exposing (img)
 
 main : Program () Model Msg
 main =
@@ -163,12 +164,18 @@ renderList model =
 
 -- VIEW
 
+pauseImg : Html msg
+pauseImg = img ((src "font-awesome/pause-solid.svg") :: stopStartIconStyle) []
+
+playImg : Html msg
+playImg = img ((src "font-awesome/play-solid.svg") :: stopStartIconStyle) []
+
 
 view : Model -> Html Msg
 view model =
   div mainDivStyle [
        div [style "font-size" "33%"] [
-           div [style "margin-top" "5px"] [
+           div controlDivStyle [
                  span [] [text <| (String.fromFloat model.speed) ++ "ms/step"]
                 ,br [] []
                 ,input [
@@ -179,8 +186,11 @@ view model =
                     ,onInput UpdateSpeed
                 ] []
                 ,br [] []
-                ,button [onSubmit RunStep, onClick RunStep] [text "one step"]
-                ,button [onClick ToggleTimeStep] [text "⏯️"]
+                ,button (
+                    [onSubmit RunStep, onClick RunStep] ++ 
+                    oneStepButtonStyle) [text "run single step"]
+                ,button ((onClick ToggleTimeStep) :: stopStartButtonStyle) 
+                    [if model.timeStepToggle then pauseImg else playImg]
             ]
            ,br [] []
            ,div haltStyle (

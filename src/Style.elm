@@ -11,6 +11,53 @@ mainDivStyle = [
     ,style "font-size" "300%"
     ,style "font-family" "monospace, monospace" --repeating monospace twice is recomended behaviour to stop browser from scaling down text: https://stackoverflow.com/questions/38781089/font-family-monospace-monospace
     ]  
+
+controlDivStyle : List (Html.Attribute msg)
+controlDivStyle = [
+     style "width" "25%"
+    ,style "margin" "10px auto"
+    ,style "box-shadow" "0 0px 8px 0 rgba(104, 104, 104, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+    ,style "background-color" "#EEFFF4"
+    ,style "padding-bottom" "5px"
+    ]
+
+--background-color: #b59aff;
+--border: 3px solid;
+--border-color: #b79eff;
+--padding: 2px;
+--   color: white;
+
+oneStepButtonStyle : List (Html.Attribute msg)
+oneStepButtonStyle = [
+     style "background-color" "#b59aff"
+    ,style "border" "3px solid"
+    ,style "border-color" "#b79eff"
+    ,style "padding" "2px"
+    ,style "color" "white"
+    ,style "margin-right" "7px"
+    ]
+
+stopStartButtonStyle : List (Html.Attribute msg)
+stopStartButtonStyle = [
+     style "background-color" "green"
+    ,style "border" "3px solid"
+    ,style "border-color" "darkgreen"
+    ,style "padding" "2px"
+    ,style "color" "white"
+    ,style "width" "2.5ch"
+    ]
+
+
+svgShowOnlyLight : List (Html.Attribute msg)
+svgShowOnlyLight = [
+    style "filter" "brightness(0) invert(1)" --brightness(0) set everything black then invert it all
+ ]
+
+stopStartIconStyle : List (Html.Attribute msg)
+stopStartIconStyle = svgShowOnlyLight ++ [
+    style "height" "1.5ex" --maps to exact height of 1 char (consitent due to monospace font)
+    ]
+
 baseCellStyle : Model -> Int -> List (Html.Attribute msg)
 baseCellStyle model index =
     --highlights the cells base on what they refer to
@@ -120,3 +167,4 @@ inputStyle = [
     ,style "width" "50%"
     ,style "text-align" "center"
     ]
+
