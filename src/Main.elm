@@ -122,15 +122,11 @@ update msg model =
 
 createIndex : Int -> Html msg
 createIndex index =
-    div [style "float" "right"
-        ,style "font-size" "50%"
-        ,style "margin-right" "2px"
-        ,style "color" (if index >= 0 then "black" else "red")
-        ] [text (fromInt index)]
+    div (cellIndexLabelStyle index) [text (fromInt index)]
 
 generateElement : Model -> Int -> Int -> Html Msg
 generateElement model index num =
-    li (getStyle model index) [
+    li (cellStyle model index) [
         lazy text (fromInt num)
         ,lazy createIndex index
     ]
@@ -143,7 +139,6 @@ generateDict model =
     ) model.tape
 
 generateList: Dict Int (Html Msg) -> Model -> List (Html Msg)
-
 generateList dict model = 
     --creates a list up to the highest store
     --pulls to see if the tape has a value and shows zero if not
@@ -154,7 +149,7 @@ generateList dict model =
         --defualt of zero so will display just zero on empty list
         --if pointing at far out zeros, display the mem and jump positions
         count = List.range lowerRange upperRange
-        zero index = li (getStyle model index) [text "0", createIndex index]
+        zero index = li (cellStyle model index) [text "0", createIndex index]
     in
         List.map (
             \num -> withDefault (lazy zero num) (Dict.get num dict)
@@ -187,8 +182,9 @@ view model =
                 ,button [onClick ToggleTimeStep] [text "⏯️"]
             ]
            ,br [] []
-           ,div [style "color" "red", style "font-size" "300%"] (if model.curPos < 0 then [text "Halted"] else [])
-
+           ,div haltStyle (
+                if model.curPos < 0 then [text "Halted"] else []
+            )
        ]
        ,div outputStyle 
             [text "Output:"
@@ -196,11 +192,10 @@ view model =
             text model.output
             ]
        ,div memDivStyle (renderList model)
-       ,input [
+       ,input (inputStyle ++ [
             placeholder "set cell values (spaces between)"
             ,value model.stateInput
             ,onInput UpdateInput
             ,onEnter (SetState model.stateInput)
-            ,style "margin" "auto"
-            ] []
+            ]) []
     ]

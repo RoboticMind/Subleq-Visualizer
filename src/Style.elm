@@ -5,8 +5,8 @@ import Html.Attributes exposing (style)
 import Html
 
 
-getBaseCellStyle : Model -> Int -> List (Html.Attribute msg)
-getBaseCellStyle model index =
+baseCellStyle : Model -> Int -> List (Html.Attribute msg)
+baseCellStyle model index =
     --highlights the cells base on what they refer to
     if index == model.curPos then
         memStyleA
@@ -17,8 +17,8 @@ getBaseCellStyle model index =
     else
         defualtStyle
 
-getStyle : Model -> Int -> List (Html.Attribute msg)
-getStyle model index = 
+cellStyle : Model -> Int -> List (Html.Attribute msg)
+cellStyle model index = 
     let
         compareAppend =
             if getTapeValue model (model.curPos) == index then
@@ -38,11 +38,19 @@ getStyle model index =
 
         appendedStyle = compareAppend ++ jumpPointCompare
     in
-        getBaseCellStyle model index ++ appendedStyle
+        baseCellStyle model index ++ appendedStyle
+
+cellIndexLabelStyle : Int -> List (Html.Attribute msg)
+cellIndexLabelStyle index = [
+         style "float" "right"
+        ,style "font-size" "50%"
+        ,style "margin-right" "2px"
+        ,style "color" (if index >= 0 then "black" else "red")
+    ]
 
 memStyleA : List (Html.Attribute msg)
 memStyleA = [
-    style "display" "inline"
+     style "display" "inline"
     ,style "border" "solid black"
     ,style "background" "lightgreen"
     ,style "flex" "1 1 30%"
@@ -94,7 +102,13 @@ outputStyle = [
     ,style "margin-top" "5px"
     ]
 
+haltStyle : List (Html.Attribute msg)
 haltStyle = [
      style "color" "red"
     ,style "font-size" "300%"
+    ]
+
+inputStyle : List (Html.Attribute msg)
+inputStyle = [
+    style "margin" "auto"
     ]
