@@ -21,12 +21,6 @@ controlDivStyle = [
     ,style "padding-bottom" "5px"
     ]
 
---background-color: #b59aff;
---border: 3px solid;
---border-color: #b79eff;
---padding: 2px;
---   color: white;
-
 oneStepButtonStyle : List (Html.Attribute msg)
 oneStepButtonStyle = [
      style "background-color" "#b59aff"
