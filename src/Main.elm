@@ -189,7 +189,7 @@ view model =
                 ,button (
                     [onSubmit RunStep, onClick RunStep] ++ 
                     oneStepButtonStyle) [text "run single step"]
-                ,button ((onClick ToggleTimeStep) :: stopStartButtonStyle) 
+                ,button ((onClick ToggleTimeStep) :: stopStartButtonStyle model) 
                     [if model.timeStepToggle then pauseImg else playImg]
             ]
            ,br [] []

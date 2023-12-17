@@ -35,17 +35,38 @@ oneStepButtonStyle = [
     ,style "padding" "2px"
     ,style "color" "white"
     ,style "margin-right" "7px"
+    ,style "cursor" "pointer"
     ]
 
-stopStartButtonStyle : List (Html.Attribute msg)
-stopStartButtonStyle = [
-     style "background-color" "green"
+
+pauseButtonStyle : List (Html.Attribute msg)
+pauseButtonStyle = [
+     style "background-color" "rgb(255, 155, 155)"
     ,style "border" "3px solid"
-    ,style "border-color" "darkgreen"
+    ,style "border-color" "#ff9b9b"
     ,style "padding" "2px"
     ,style "color" "white"
     ,style "width" "2.5ch"
+    ,style "cursor" "pointer"
     ]
+
+startButtonStyle : List (Html.Attribute msg)
+startButtonStyle = [
+     style "background-color" "#59d059"
+    ,style "border" "3px solid"
+    ,style "border-color" "#40ce40"
+    ,style "padding" "2px"
+    ,style "color" "white"
+    ,style "width" "2.5ch"
+    ,style "cursor" "pointer"
+    ]
+
+stopStartButtonStyle : Model -> List (Html.Attribute msg)
+stopStartButtonStyle model = 
+    if model.timeStepToggle == True then
+        pauseButtonStyle
+    else
+        startButtonStyle
 
 
 svgShowOnlyLight : List (Html.Attribute msg)
