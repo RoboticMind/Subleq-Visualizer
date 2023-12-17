@@ -5,12 +5,14 @@ import Html.Attributes exposing (style)
 import Html
 import Model exposing (isRunning)
 
+defaultFont : String
+defaultFont = "monospace, monospace" --repeating monospace twice is recomended behaviour to stop browser from scaling down text: https://stackoverflow.com/questions/38781089/font-family-monospace-monospace
 
 mainDivStyle : List (Html.Attribute msg)
 mainDivStyle = [
      style "text-align" "center"
     ,style "font-size" "300%"
-    ,style "font-family" "monospace, monospace" --repeating monospace twice is recomended behaviour to stop browser from scaling down text: https://stackoverflow.com/questions/38781089/font-family-monospace-monospace
+    ,style "font-family" defaultFont
     ,style "transform" "scale(1.5)"
     ,style "transform-origin" "top"
     ]  
@@ -33,6 +35,7 @@ oneStepButtonStyle = [
     ,style "color" "white"
     ,style "margin-right" "7px"
     ,style "cursor" "pointer"
+    ,style "font-family" defaultFont
     ]
 
 
@@ -45,6 +48,7 @@ pauseButtonStyle = [
     ,style "color" "white"
     ,style "width" "2.5ch"
     ,style "cursor" "pointer"
+    ,style "font-family" defaultFont
     ]
 
 startButtonStyle : List (Html.Attribute msg)
@@ -185,5 +189,6 @@ inputStyle = [
      style "margin" "auto"
     ,style "width" "50%"
     ,style "text-align" "center"
+    ,style "font-family" defaultFont
     ]
 
