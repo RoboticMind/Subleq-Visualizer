@@ -10,6 +10,8 @@ mainDivStyle = [
      style "text-align" "center"
     ,style "font-size" "300%"
     ,style "font-family" "monospace, monospace" --repeating monospace twice is recomended behaviour to stop browser from scaling down text: https://stackoverflow.com/questions/38781089/font-family-monospace-monospace
+    ,style "transform" "scale(1.5)"
+    ,style "transform-origin" "top"
     ]  
 
 controlDivStyle : List (Html.Attribute msg)
@@ -167,7 +169,8 @@ memDivStyle = [
 outputStyle : List (Html.Attribute msg)
 outputStyle = [
      style "font-size" "50%"
-    ,style "margin-top" "5px"
+    ,style "width" "50%"
+    ,style "margin" "5px auto"
     ]
 
 haltStyle : List (Html.Attribute msg)
