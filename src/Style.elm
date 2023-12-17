@@ -19,7 +19,8 @@ mainDivStyle = [
 
 controlDivStyle : List (Html.Attribute msg)
 controlDivStyle = [
-     style "width" "25%"
+     style "width" "60%"
+    ,style "max-width" "300px"
     ,style "margin" "10px auto"
     ,style "box-shadow" "0 0px 8px 0 rgba(104, 104, 104, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     ,style "background-color" "#EEFFF4"
