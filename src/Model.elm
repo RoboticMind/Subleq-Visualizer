@@ -17,3 +17,10 @@ getTapeValue : Model -> Int ->  Int
 getTapeValue model index =
     withDefault 0 (Dict.get index model.tape)
 
+isHalted : Model -> Bool
+isHalted model = 
+    model.curPos < 0
+
+isRunning : Model -> Bool
+isRunning model =
+    not (isHalted model) && model.timeStepToggle

@@ -3,6 +3,7 @@ module Style exposing (..)
 import Model exposing (Model, getTapeValue)
 import Html.Attributes exposing (style)
 import Html
+import Model exposing (isRunning)
 
 
 mainDivStyle : List (Html.Attribute msg)
@@ -59,7 +60,7 @@ startButtonStyle = [
 
 stopStartButtonStyle : Model -> List (Html.Attribute msg)
 stopStartButtonStyle model = 
-    if model.timeStepToggle == True then
+    if isRunning model then
         pauseButtonStyle
     else
         startButtonStyle
