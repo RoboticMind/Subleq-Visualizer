@@ -9,7 +9,7 @@
 <body>
     <div class="explainer">
         <h1> What is Subleq?</h1>
-        <a href="#visual"><i>(click  to skip to the visual)</i></a>
+        <a href="#visual"><i>(click to skip to the visual)</i></a>
         <h2>The Usual Explanation</h2>
         <p> Subleq is a one-instruction set computer. That
             one instruction is to: <b>sub</b>tract <i>(and)</i> 
@@ -41,7 +41,7 @@
             subtracting numbers. They are key to doing any computation on a machine. 
             You chain together instructions to do more 
             complicated tasks, but can only directly run the instructions a machine knows. When
-            make a machine, you have to choose what instructions you'll have in
+            you make a machine, you have to choose what instructions you'll have in
             what's called an <b>instruction set</b>. For us, we'll be using
             subleq as our instruction set
         </p>
@@ -79,7 +79,7 @@
         <h3> Subleq's Instruction (the branch) </h3>
         <p>
             Now for the last part. Subleq looks at the output of our subtraction
-            from the first part of the instruction. If it's less than or equal to zero, 
+            from the first part of the instruction. If the result is less than or equal to zero, 
             we set the instruction pointer to be the last number in our instruction. If not, 
             we carry on and read the next instruction as normal. 
         </p>
@@ -101,8 +101,8 @@
         <h3>Some Conventions</h3>
         <p>
             We have a convention that when the address <code>-1</code> is subtracted
-            to, we treat that as an output. We lookup the amount we subtracted by
-            in a table of characters (specifically the ASCII table) and use that in our output
+            to, we treat that as an output. We look up the amount we subtracted in a table of characters 
+            (the ASCII table) and use that in our output."
         </p>
 
         <p>
