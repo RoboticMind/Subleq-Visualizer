@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subleq Visualization</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="explainer">
+        <h1> What is Subleq?</h1>
+        <a href="#visual"><i>(click  to skip to the visual)</i></a>
+        <h2>The Usual Explanation</h2>
+        <p> Subleq is a one-instruction set computer. That
+            one instruction is to: <b>sub</b>tract <i>(and)</i> 
+            <b>b</b>ranch <i>(if)</i> <b>l</b>ess <i>(than or)</i>
+            <b>eq</b>ual <i>(to zero)</i>
+        </p>
+        <h2> But What Does That <i>Mean</i>?</h2>
+        <h3>Memory</h3>
+        <p>Let's start at what memory is - essentially a big list of numbers.
+            Real machines are more complicated, but subleq doesn't run on real machines. For 
+            us all we care is that we have a list of numbers and each number
+            has a <b>memory address</b> telling us how far along that list it is. So
+            if memory was the list:
+        </p> 
+        <div class="text-center"><pre><code>9  8  2  15</code></pre></div>
+        <p>
+            we'd have a value of <code>9</code> at address 0, <code>8</code> at address 1, 
+            <code>2</code> at address 2, and <code>15</code> at address 3
+        </p>
+
+        <p>Ok, now we have a bunch of numbers in memory, but what can we do with it?
+            We'd like to do some computation on some data, but how do we do that
+            with only numbers?
+        </p>
+
+        <h3>What are Instructions</h3>
+        <p>
+            Instructions are the tasks a machine knows how to do directly. For instance,
+            subtracting numbers. They are key to doing any computation on a machine. 
+            You chain together instructions to do more 
+            complicated tasks, but can only directly run the instructions a machine knows. When
+            make a machine, you have to choose what instructions you'll have in
+            what's called an <b>instruction set</b>. For us, we'll be using
+            subleq as our instruction set
+        </p>
+
+        <p>
+            When we choose our instructions sets, we also define how we can 
+            read numbers from memory and convert them into an instruction.
+            In subleq, we only have one instruction which makes that conversion simpler
+        </p>
+
+        <h3>Subleq's Instruction (the subtraction) </h3>
+        <p>
+            An instruction in Subleq could look like this <code>9 4 15</code>. Uh... 
+            what does that mean? 
+        </p> 
+        <p>
+            First, subleq chooses to uses the first two numbers
+            to do subtraction. The value at memory address <code>9</code> (1st number) is subtracted
+            from the value at memory address <code>4</code> (2nd number). Once we compute that we replace the existing value
+            at address <code>4</code> (2nd number) with the subtracted number we computed.
+        </p>
+        <h3> Instruction Pointer </h3>
+        <p>
+            Before we can understand last part, we need to know how instructions are run in general. We
+            keep track of where we are with something called the <b>instruction pointer</b>. 
+            It points to the address holding the start of the instruction we're running 
+            right now. At the very start, we'll set it to address 0 by convention. 
+            
+        <p> After each instruction we need to choose where to go. What happens
+            after most instructions is that move over by the size of our instruction (3 numbers) 
+            to get to the next instruction. But there is another case where
+            we can instead make our instruction pointer go somewhere else
+        </p>
+
+        <h3> Subleq's Instruction (the branch) </h3>
+        <p>
+            Now for the last part. Subleq looks at the output of our subtraction
+            from the first part of the instruction. If it's less than or equal to zero, 
+            we set the instruction pointer to be the last number in our instruction. If not, 
+            we carry on and read the next instruction as normal. 
+        </p>
+
+        <p>
+            This lets us run different instructions depending on the output of
+            that subtraction, so the code has a <b>branch</b> because it
+            could go to one instruction or to another.
+        </p>
+
+        <p>
+            This might seem a little arbitrary, and it kind of is, but you can
+            use this to compute anything you want. The proof
+            of that is a bit beyond this, but it can be done. Is it practical
+            to compute this way? Probably not, but you've already read this far now, so
+            let's add more arbitrariness to make it slightly more useful
+        </p>
+
+        <h3>Some Conventions</h3>
+        <p>
+            We have a convention that when the address <code>-1</code> is subtracted
+            to, we treat that as an output. We lookup the amount we subtracted by
+            in a table of characters (specifically the ASCII table) and use that in our output
+        </p>
+
+        <p>
+            If we ever point the instruction pointer to a negative address, we treat that
+            as the program telling us we want to halt and stop running any more code 
+        </p>
+
+        <h2 id="visual"> A Visual</h2>
+        <p>Ok, sure maybe we can sort of understand that, but let's see it in practice.
+        Below is a tool where we can step through subleq running any program you want.
+        By default it's running a program that prints out "Hi " in a loop forever. You can
+        enter a new program by typing in a new list of starting memory values at the bottom and hitting enter</p>
+        
+        <p>
+            To make it easier to understand what's going on, we have the cells highlighted
+            or underlined with a color coding system. The instruction itself is
+            highlighted in green and yellow. In green for the subtraction part, yellow
+            for the branch part
+        </p>
+
+        <p>
+            The <span class="blue-text">blue text</span> is the address we'll subtract. The 
+            <span class="dark-orange-text">orange text</span> points to the address we subtract the other value from. The
+            <span class="underline-overline text-decoration-blue">underlined</span> 
+            <span class="underline-overline text-decoration-dark-orange">portions</span> 
+            are the values at those addresses and match the
+            colors used in the instruction. The <span class="underline-overline text-decoration-yellow">yellow underline</span>, 
+            similarly is the place we'll go to if our subtraction is less than or equal to 0
+        </p>
+
+    </div>
+
+    <div class="warn-on-mobile">
+        <i>The visual below works better on desktop</i>
+    </div>
+    
+    <iframe frameborder="0" src="visual.html" class="full-size-iframe"></iframe>
+</body>
+</html>
