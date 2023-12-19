@@ -14,5 +14,5 @@ The `index.html`  page expects the elm output to
 be in `visual.html`, so to build all we need to run is:
 
 ```bash
-elm make src/Main.elm --optimize --output=visual.html
+elm make elm-src/Main.elm --optimize --output=visual.html
 ```
