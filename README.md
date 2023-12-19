@@ -6,11 +6,11 @@
 
 This project aims to explain what Subleq is
 and how it works. It contains a written explanation
-in the `index.html` file and visualization tool written in Elm that lives in the `src` folder
+in the `explainer-website-src` file and visualization tool written in Elm that lives in the `elm-src` folder
 
 ## Building The Visualizer
 
-The `index.html`  page expects the elm output to
+The explainer page expects the elm output to
 be in `visual.html`, so to build all we need to run is:
 
 ```bash
